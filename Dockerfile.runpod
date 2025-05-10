@@ -1,0 +1,58 @@
+FROM runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04@sha256:cb154fcca15d1d6ce858cfa672b76505e30861ef981d28ec94bd44168767d853
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+ARG FRAMEPACK_COMMIT_HASH=c5d375661a2557383f0b8da9d11d14c23b0c4eaf
+ARG EICHI_COMMIT_HASH=85a75be441c81585f59e41df88cc974a4a47d68d
+ARG UID=1000
+
+COPY --from=ghcr.io/astral-sh/uv:0.7.3 /uv /uvx /bin/
+
+RUN : Setup environment \
+    && mkdir /data \
+    && adduser --disabled-password --gecos "" --home "/data/runner" --shell "/bin/bash" --uid "${UID}" runner \
+    && apt-get update \
+    && apt-get install \
+    --yes \
+    git \
+    wget \
+    gosu \
+    rsync \
+    libgl1 \
+    libglib2.0-0 \
+    libgoogle-perftools-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && : Clone FramePack \
+    && mkdir /data/workspace \
+    && cd /data/workspace \
+    && git init \
+    && git remote add origin https://github.com/lllyasviel/FramePack \
+    && git fetch --depth 1 origin "${FRAMEPACK_COMMIT_HASH}" \
+    && git checkout FETCH_HEAD \
+    # && uv pip uninstall --system pytorch-triton \
+    # && uv pip install --system --no-cache-dir --upgrade --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128 \
+    && uv pip install --system --no-cache-dir -r requirements.txt notebook honcho \
+    && uv pip install --system --no-cache-dir gradio==5.29.0 \
+    # && uv pip install --system --no-cache-dir gradio==5.29.0 sageattention triton \
+    && : Clone Eichi \
+    && mkdir /tmp/eichi \
+    && cd /tmp/eichi \
+    && git init \
+    && git remote add origin https://github.com/git-ai-code/FramePack-eichi \
+    && git fetch --depth 1 origin "${EICHI_COMMIT_HASH}" \
+    && git checkout FETCH_HEAD \
+    && cp -r /tmp/eichi/webui/* /data/workspace
+
+WORKDIR /workspace
+
+COPY ./entrypoint.sh /
+COPY ./Procfile /data/workspace
+
+RUN touch /jupyter.log && chown runner:runner /jupyter.log
+
+EXPOSE 7860
+EXPOSE 8888
+
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD ["honcho", "start", "notebook", "endframe_ichi_f1"]

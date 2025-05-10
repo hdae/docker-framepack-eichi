@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# User config
-chown -R appuser /workspace
-rsync -av /.workspace/ /workspace
+# Copy files
+rsync -a --inplace /data/workspace/ /workspace 2>/dev/null
+chown -Rf runner /workspace
 
-exec gosu appuser "$@"
+exec gosu runner "$@"

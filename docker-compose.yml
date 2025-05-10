@@ -1,0 +1,25 @@
+name: "framepack"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hdae/framepack-eichi-runpod:2025-05-10
+    environment:
+      - JUPYTER_PASSWORD=jupy73r
+    ports:
+      - 7860:7860
+      - 8888:8888
+    volumes:
+      - workspace:/workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  workspace:
