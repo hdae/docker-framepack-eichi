@@ -1,6 +1,6 @@
 # FramePack + Eichi on Docker / Runpod
 
-[RunPod Template](https://runpod.io/console/deploy?template=ep11yd7v73&ref=oxrbnozc)
+[Deploy to RunPod](https://runpod.io/console/deploy?template=ep11yd7v73&ref=oxrbnozc)
 
 FramePack EichiをRunpodで簡単に動かすことができるやつ。
 
@@ -22,10 +22,14 @@ docker push "hdae/framepack-eichi-runpod:${tag}"
 
 起動が少し速く、NVIDIA Blackwellにも対応しています。
 
-- Tested on `B200` and `RTX 5090`, and `A40`
+- Tested on `B200`, `RTX 5090`, `A100`, `A40`
 - Links
   - [GitHub](https://github.com/hdae/docker-framepack-eichi)
   - [Report Issues](https://github.com/hdae/docker-framepack-eichi/issues)
+- Current version
+  - FramePack: c5d375661a2557383f0b8da9d11d14c23b0c4eaf
+  - FramePack Eichi: 1cb362fbda71500f550b04698023671550380090
+  - FramePack Loop: 0acc1de686340b964c2ea2feee0638b563cd253f
 
 ## Usage
 
@@ -51,6 +55,10 @@ docker push "hdae/framepack-eichi-runpod:${tag}"
   - `honcho start notebook endframe_ichi_f1`
 - oneframe_ichi
   - `honcho start notebook oneframe_ichi`
+- demo_gradio_loop
+  - `honcho start notebook demo_gradio_loop`
+- demo_gradio_video2loop
+  - `honcho start notebook demo_gradio_video2loop`
 
 ## 言語変更
 
@@ -64,6 +72,7 @@ This project utilizes and is grateful for the following open-source projects:
 
 - [lllyasviel/FramePack](https://github.com/lllyasviel/FramePack)
 - [git-ai-code/FramePack-eichi](https://github.com/git-ai-code/FramePack-eichi)
+- [red-polo/FramePackLoop](https://github.com/red-polo/FramePackLoop)
 
 Here is the English translation of the provided README:
 
@@ -96,6 +105,10 @@ this:
   - `honcho start notebook endframe_ichi_f1`
 - oneframe_ichi
   - `honcho start notebook oneframe_ichi`
+- demo_gradio_loop
+  - `honcho start notebook demo_gradio_loop`
+- demo_gradio_video2loop
+  - `honcho start notebook demo_gradio_video2loop`
 
 ## Changing Language
 
@@ -111,3 +124,4 @@ This project utilizes and is grateful for the following open-source projects:
 
 - [lllyasviel/FramePack](https://github.com/lllyasviel/FramePack)
 - [git-ai-code/FramePack-eichi](https://github.com/git-ai-code/FramePack-eichi)
+- [red-polo/FramePackLoop](https://github.com/red-polo/FramePackLoop)

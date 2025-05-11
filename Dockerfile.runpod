@@ -4,7 +4,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 ARG FRAMEPACK_COMMIT_HASH=c5d375661a2557383f0b8da9d11d14c23b0c4eaf
-ARG EICHI_COMMIT_HASH=85a75be441c81585f59e41df88cc974a4a47d68d
+ARG EICHI_COMMIT_HASH=1cb362fbda71500f550b04698023671550380090
+ARG LOOP_COMMIT_HASH=0acc1de686340b964c2ea2feee0638b563cd253f
 ARG UID=1000
 
 COPY --from=ghcr.io/astral-sh/uv:0.7.3 /uv /uvx /bin/
@@ -42,7 +43,15 @@ RUN : Setup environment \
     && git remote add origin https://github.com/git-ai-code/FramePack-eichi \
     && git fetch --depth 1 origin "${EICHI_COMMIT_HASH}" \
     && git checkout FETCH_HEAD \
-    && cp -r /tmp/eichi/webui/* /data/workspace
+    && cp -r /tmp/eichi/webui/* /data/workspace \
+    && : Clone Loop \
+    && mkdir /tmp/loop \
+    && cd /tmp/loop \
+    && git init \
+    && git remote add origin https://github.com/red-polo/FramePackLoop \
+    && git fetch --depth 1 origin "${LOOP_COMMIT_HASH}" \
+    && git checkout FETCH_HEAD \
+    && cp -n /tmp/loop/*.py /data/workspace
 
 WORKDIR /workspace
 
