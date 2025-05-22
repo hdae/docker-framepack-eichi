@@ -26,10 +26,6 @@ docker push "hdae/framepack-eichi-runpod:${tag}"
 - Links
   - [GitHub](https://github.com/hdae/docker-framepack-eichi)
   - [Report Issues](https://github.com/hdae/docker-framepack-eichi/issues)
-- Current version
-  - FramePack: c5d375661a2557383f0b8da9d11d14c23b0c4eaf
-  - FramePack Eichi: 1cb362fbda71500f550b04698023671550380090
-  - FramePack Loop: 0acc1de686340b964c2ea2feee0638b563cd253f
 
 ## Usage
 
@@ -92,8 +88,7 @@ It can boot a bit faster, and it supports NVIDIA Blackwell.
 
 ## Changing Variants
 
-You can change the variant by writing it in the `Container Start Command` like
-this:
+You can change the variant by writing it in the `Container Start Command` like this:
 
 - demo_gradio
   - `honcho start notebook demo_gradio`
@@ -125,3 +120,18 @@ This project utilizes and is grateful for the following open-source projects:
 - [lllyasviel/FramePack](https://github.com/lllyasviel/FramePack)
 - [git-ai-code/FramePack-eichi](https://github.com/git-ai-code/FramePack-eichi)
 - [red-polo/FramePackLoop](https://github.com/red-polo/FramePackLoop)
+
+## Commit hashes
+
+- 2025-05-23 (current)
+  - FramePack: c5d375661a2557383f0b8da9d11d14c23b0c4eaf
+  - FramePack Eichi: 7fa8edead223af28fbc095644ed596bcb59c51bf (update)
+  - FramePack Loop: 0acc1de686340b964c2ea2feee0638b563cd253f
+- 2025-05-14
+  - FramePack: c5d375661a2557383f0b8da9d11d14c23b0c4eaf
+  - FramePack Eichi: 03a76f8a2b4d4eb815aacafcc50a051f260afd24 (update)
+  - FramePack Loop: 0acc1de686340b964c2ea2feee0638b563cd253f
+- 2025-05-11
+  - FramePack: c5d375661a2557383f0b8da9d11d14c23b0c4eaf
+  - FramePack Eichi: 1cb362fbda71500f550b04698023671550380090
+  - FramePack Loop: 0acc1de686340b964c2ea2feee0638b563cd253f
